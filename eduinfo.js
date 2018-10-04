@@ -10,8 +10,8 @@ class Eduinfo {
   // claims() should return or resolve with an object with claims that are mapped 1:1 to
   // what your OP supports, oidc-provider will cherry-pick the requested ones automatically
   claims() {
-    return Object.assign({}, USERS[this.accountId], {
-      sub: this.accountId,
+	const obj = {
+	  sub: this.accountId,
 	  titles: {
 		  schoolid: USERS[this.accountId].schoolid, 
 		  titles: USERS[this.accountId].titles
@@ -24,7 +24,8 @@ class Eduinfo {
 		  classno: USERS[this.accountId].classno,
 		  classtitle: USERS[this.accountId].classtitle
 	  },
-    });
+	};
+    return Object.assign({}, obj);
   }
 
   static async findById(ctx, id) {

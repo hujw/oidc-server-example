@@ -10,9 +10,14 @@ class Account {
   // claims() should return or resolve with an object with claims that are mapped 1:1 to
   // what your OP supports, oidc-provider will cherry-pick the requested ones automatically
   claims() {
-    return Object.assign({}, USERS[this.accountId], {
-      sub: this.accountId,
-    });
+	const obj = {
+	  sub: this.accountId,
+	  name: USERS[this.accountId].name, 
+	  given_name: USERS[this.accountId].given_name,
+	  family_name: USERS[this.accountId].family_name,
+	  email: USERS[this.accountId].email,
+	};
+    return Object.assign({}, obj);
   }
 
   static async findById(ctx, id) {

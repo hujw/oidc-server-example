@@ -21,6 +21,7 @@ const oidc = new Provider('http://localhost:3000/oidc/', {
   // passing it our Account model method is sufficient, it should return a Promise that resolves
   // with an object with accountId property and a claims method.
   findById: Account.findById,
+  findEduById: Eduinfo.findById,
 
   // let's tell oidc-provider we also support the email and name scope
   claims: {
@@ -29,6 +30,7 @@ const oidc = new Provider('http://localhost:3000/oidc/', {
 	//email: ['email'],
 	//name: ['name'],
 	profile: ['openid', 'name', 'given_name', 'family_name', 'email'],
+	eduinfo: ['schoolid', 'titles', 'classinfo'],
   },
 
   // let's tell oidc-provider where our own interactions will be
@@ -68,6 +70,7 @@ const oidc = new Provider('http://localhost:3000/oidc/', {
 	revocation: '/oidc/token/revocation',
     token: '/oidc/token',
     userinfo: '/oidc/userinfo',
+	eduinfo: '/cncresource/eduinfo',
 	code_verification: '/oidc/device',
   },
 });
@@ -149,6 +152,7 @@ oidc.initialize({
   expressApp.listen(3000);
 });
 
+/*
 const oidc2 = new Provider('http://localhost:3001/cncresource/', {
 
   // oidc-provider only looks up the accounts by their ID when it has to read the claims,
@@ -282,3 +286,4 @@ oidc2.initialize({
   // express listen
   expressApp.listen(3001);
 });
+*/
